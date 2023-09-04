@@ -1,3 +1,6 @@
+//Importing variables from the data.js
+import { BOOKS_PER_PAGE, authors, genres, books } from './data.js';
+
 matches = books
 page = 1;
 
@@ -171,8 +174,8 @@ data_list_items.click() {
     
         for (const singleBook of books) {
             if (singleBook.id === id) active = singleBook
-        } 
-    }
+        };
+    };
     
     if (!active) return
     data_list_active.open === true
