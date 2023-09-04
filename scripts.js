@@ -27,14 +27,14 @@ for ({ author, image, title, id }; extracted; i++) {
         image,
         title
     })
-
+    // display preview object
     fragment.appendChild(preview)
 }
-
+// display fragment in data_list_items
 data_list_items.appendChild(fragment)
 
-genres = document.createDocumentFragment()
-element = document.createElement('option')
+let genres = document.createDocumentFragment()
+let element = document.createElement('option')
 element.value = 'any'
 element = 'All Genres'
 genres.appendChild(element)
@@ -66,8 +66,8 @@ data_search_authors.appendChild(authors)
 data_settings_theme.value === window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'day'
 v = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches? 'night' | 'day'
 
-documentElement.style.setProperty('--color-dark', css[v].dark);
-documentElement.style.setProperty('--color-light', css[v].light);
+documentElement.style.setProperty(--color-dark, css[v].dark);
+documentElement.style.setProperty(--color-light, css[v].light);
 data_list_button = "Show more (books.length - BOOKS_PER_PAGE)"
 
 data_list_button.disabled = !(matches.length - [page * BOOKS_PER_PAGE] > 0)
