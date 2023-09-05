@@ -52,31 +52,35 @@ for (let i = 0; i < extracted.length; i++) {
 
     fragment.appendChild(preview)
 }
-// display fragment in data_list_items
-const booklist1 = document.querySelector('[data-list-items]') 
-booklist1.appendChild(fragment)
+// display fragment in data-list-items
+const book_list_1 = document.querySelector('[data-list-items]') 
+book_list_1.appendChild(fragment)
 
-const searchbutton = document.querySelector("[data-header-search]");
-searchbutton.addEventListener('click', () => {
+// create search button with data stored in data-header-search = imported from data.js
+const search_button = document.querySelector("[data-header-search]");
+search_button.addEventListener('click', () => {
  document.querySelector("[data-search-overlay]").style.display = "block";
 })
 
-const searchCancel = document.querySelector("[data-search-cancel]");
-searchCancel.addEventListener('click', () => {
+// create cancel button with data stored in data-search-cancel = imported from data.js
+const search_cancel = document.querySelector("[data-search-cancel]");
+search_cancel.addEventListener('click', () => {
  document.querySelector("[data-search-overlay]").style.display = "none";
 })
 
-const settingbutton = document.querySelector("[data-header-settings]")
-settingbutton.addEventListener('click', () => {
+// create settings button with data stored in data-header-settings = imported from data.js
+const setting_button = document.querySelector("[data-header-settings]")
+setting_button.addEventListener('click', () => {
  document.querySelector("[data-settings-overlay]").style.display = "block";
 })
 
-const settingCancel = document.querySelector('[data-settings-cancel]')
-settingCancel.addEventListener('click', () => {
+// create cancel settings button with data stored in data-setting-cancel = imported from data.js
+const setting_cancel = document.querySelector('[data-settings-cancel]')
+setting_cancel.addEventListener('click', () => {
 document.querySelector("[data-settings-overlay]").style.display = "none";
 })
-
-const dataSettingsTheme = document.querySelector('[data-settings-theme]');
+// create data setting theme with data stored in data-setting-theme = imported from data.js
+const data_settings_theme = document.querySelector('[data-settings-theme]');
 
 const saveButton = document.querySelector("body > dialog:nth-child(5) > div > div > button.overlay__button.overlay__button_primary");
 saveButton.addEventListener('click', handleClick);
