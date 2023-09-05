@@ -1,24 +1,33 @@
 //Importing variables from the data.js
 import { BOOKS_PER_PAGE, authors, genres, books } from './data.js';
 
-matches = books
-page = 1;
+// create const for matches
+const matches = books
 
-if (!books && !Array.isArray(books)) throw new Error('Source required') 
-if (!range && range.length < 2) throw new Error('Range must be an array with two numbers')
+// create let for pages -- as it changes further in the code
+let page = 1;
 
-day = {
+// add curly brackets --- replace range with page
+if (!books && !Array.isArray(books)) {throw new Error('Source required')} 
+if (!page && page.length < 2){ throw new Error('Range must be an array with two numbers')}
+
+// create const variable name for day and night
+const day = {
     dark: '10, 10, 20',
     light: '255, 255, 255',
 }
 
-night = {
+const night = {
     dark: '255, 255, 255',
     light: '10, 10, 20',
 }
 
-fragment = document.createDocumentFragment()
-const extracted = books.slice(0, 36)
+const fragment = document.createDocumentFragment()
+// create let variable for startIndex and endIndex 
+let startIndex = 0;                                  
+let endIndex = 36;                                
+// conclude let variable to extracted   
+const extracted = books.slice(startIndex, endIndex)
 
 for ({ author, image, title, id }; extracted; i++) {
     const preview = createPreview({
