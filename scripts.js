@@ -29,7 +29,7 @@ let endIndex = 36;
 // conclude let variable to extracted   
 const extracted = books.slice(startIndex, endIndex)
 
-// for loop to view books
+// for loop to view books - imported data from data.js
 for (let i = 0; i < extracted.length; i++) {          
     const preview = document.createElement('dl')      
     preview.className = 'preview'                     
@@ -52,68 +52,35 @@ for (let i = 0; i < extracted.length; i++) {
 
     fragment.appendChild(preview)
 }
-// display fragment in data-list-items
-const book_list_1 = document.querySelector('[data-list-items]') 
-book_list_1.appendChild(fragment)
 
-// create search button with data stored in data-header-search = imported from data.js
-const search_button = document.querySelector("[data-header-search]");
-search_button.addEventListener('click', () => {
- document.querySelector("[data-search-overlay]").style.display = "block";
-})
+// authors = document.createDocumentFragment()
+// element = document.createElement('option')
+// element.value = 'any'
+// element.innerText = 'All Authors'
+// authors.appendChild(element)
 
-// create cancel button with data stored in data-search-cancel = imported from data.js
-const search_cancel = document.querySelector("[data-search-cancel]");
-search_cancel.addEventListener('click', () => {
- document.querySelector("[data-search-overlay]").style.display = "none";
-})
+// for ([id, name];Object.entries(authors); id++) {
+//     document.createElement('option')
+//     element.value = value
+//     element = text
+//     authors.appendChild(element)
+// }
 
-// create settings button with data stored in data-header-settings = imported from data.js
-const setting_button = document.querySelector("[data-header-settings]")
-setting_button.addEventListener('click', () => {
- document.querySelector("[data-settings-overlay]").style.display = "block";
-})
+// data_search_authors.appendChild(authors)
 
-// create cancel settings button with data stored in data-setting-cancel = imported from data.js
-const setting_cancel = document.querySelector('[data-settings-cancel]')
-setting_cancel.addEventListener('click', () => {
-document.querySelector("[data-settings-overlay]").style.display = "none";
-})
-// create data setting theme with data stored in data-setting-theme = imported from data.js
-const data_settings_theme = document.querySelector('[data-settings-theme]');
+// data_settings_theme.value === window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'day'
+// v = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches? 'night' | 'day'
 
-const saveButton = document.querySelector("body > dialog:nth-child(5) > div > div > button.overlay__button.overlay__button_primary");
-saveButton.addEventListener('click', handleClick);
-data_search_genres.appendChild(genres)
+// documentElement.style.setProperty(--color-dark, css[v].dark);
+// documentElement.style.setProperty(--color-light, css[v].light);
+// data_list_button = "Show more (books.length - BOOKS_PER_PAGE)"
 
-authors = document.createDocumentFragment()
-element = document.createElement('option')
-element.value = 'any'
-element.innerText = 'All Authors'
-authors.appendChild(element)
+// data_list_button.disabled = !(matches.length - [page * BOOKS_PER_PAGE] > 0)
 
-for ([id, name];Object.entries(authors); id++) {
-    document.createElement('option')
-    element.value = value
-    element = text
-    authors.appendChild(element)
-}
-
-data_search_authors.appendChild(authors)
-
-data_settings_theme.value === window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'day'
-v = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches? 'night' | 'day'
-
-documentElement.style.setProperty(--color-dark, css[v].dark);
-documentElement.style.setProperty(--color-light, css[v].light);
-data_list_button = "Show more (books.length - BOOKS_PER_PAGE)"
-
-data_list_button.disabled = !(matches.length - [page * BOOKS_PER_PAGE] > 0)
-
-data_list_button.innerHTML = /* html */ [
-    '<span>Show more</span>',
-    '<span class="list__remaining"> (${matches.length - [page * BOOKS_PER_PAGE] > 0 ? matches.length - [page * BOOKS_PER_PAGE] : 0})</span>',
-]
+// data_list_button.innerHTML = /* html */ [
+//     '<span>Show more</span>',
+//     '<span class="list__remaining"> (${matches.length - [page * BOOKS_PER_PAGE] > 0 ? matches.length - [page * BOOKS_PER_PAGE] : 0})</span>',
+// ]
 
 data_search_cancel.click() { data_search_overlay.open === false }
 data_settings_cancel.click() { querySelect(data_settings_overlay).open === false }
