@@ -52,7 +52,85 @@ for (let i = 0; i < extracted.length; i++) {
 
     fragment.appendChild(preview)
 }
+// display fragment in data-list-items
+const book_list_1 = document.querySelector('[data-list-items]') 
+book_list_1.appendChild(fragment)
 
+// create search button with data stored in data-header-search = imported from data.js
+const search_button = document.querySelector("[data-header-search]");
+    search_button.addEventListener('click', () => {
+    document.querySelector("[data-search-overlay]").style.display = "block";
+})
+
+// create cancel button with data stored in data-search-cancel = imported from data.js
+const search_cancel = document.querySelector("[data-search-cancel]");
+    search_cancel.addEventListener('click', () => {
+    document.querySelector("[data-search-overlay]").style.display = "none";
+})
+
+// create settings button with data stored in data-header-settings = imported from data.js
+const setting_button = document.querySelector("[data-header-settings]")
+    setting_button.addEventListener('click', () => {
+    document.querySelector("[data-settings-overlay]").style.display = "block";
+})
+
+// create cancel settings button with data stored in data-setting-cancel = imported from data.js
+const setting_cancel = document.querySelector('[data-settings-cancel]')
+    setting_cancel.addEventListener('click', () => {
+    document.querySelector("[data-settings-overlay]").style.display = "none";
+})
+
+// create data setting theme with data stored in data-setting-theme = imported from data.js
+const data_settings_theme = document.querySelector('[data-settings-theme]');
+
+// create save button click function
+const save_button = document.querySelector("body > dialog:nth-child(5) > div > div > button.overlay__button.overlay__button_primary");
+save_button.addEventListener('click', handleClick);
+// data_search_genres.appendChild(genres)
+
+// Theme event function - click handle function
+function handleClick(event) {
+/** 
+ * The preventDefault() method of the Event interface tells the user agent that if the event 
+ * does not get explicitly handled, its default action should not be taken as it normally would be.
+ */
+    event.preventDefault();
+    // create variable assigning data from variable that was created data_settings_theme 
+    const value = data_settings_theme.value;
+    const body = document.querySelector('body');
+    const overlay = document.querySelector("[data-settings-overlay]");
+    
+    // Type of themes colors in an object
+    const themes = {
+        day: {
+            dark: '#000000',
+            light: '#FFFFFF'
+        },
+        night: {
+            dark: '#111111',
+            light: '#CCCCCC'
+        }
+    };
+
+    // if statement day
+    if (value === 'day') {
+        // set color included from the object above
+        setThemeColors(body, themes.day.dark, themes.day.light);
+        overlay.style.display = "none";
+    }
+
+    // if statement night
+    if (value === 'night') {
+        // set color included from the object above
+        setThemeColors(body, themes.night.dark, themes.night.light);
+        overlay.style.display = "none";
+    }
+}
+// clickHandler 
+function setThemeColors(element, darkColor, lightColor) {
+    element.style.setProperty('--color-dark', darkColor);
+    element.style.setProperty('--color-light', lightColor);
+}
 // authors = document.createDocumentFragment()
 // element = document.createElement('option')
 // element.value = 'any'
