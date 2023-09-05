@@ -9,7 +9,7 @@ let page = 1;
 
 // add curly brackets --- replace range with page
 if (!books && !Array.isArray(books)) {throw new Error('Source required')} 
-if (!page && page.length < 2){ throw new Error('Range must be an array with two numbers')}
+if (!page && page.length < 2) {throw new Error('Range must be an array with two numbers')}
 
 // create const variable name for day and night
 const day = {
@@ -29,32 +29,57 @@ let endIndex = 36;
 // conclude let variable to extracted   
 const extracted = books.slice(startIndex, endIndex)
 
-for ({ author, image, title, id }; extracted; i++) {
-    const preview = createPreview({
-        author,
-        id,
-        image,
-        title
-    })
-    // display preview object
+// for loop to view books
+for (let i = 0; i < extracted.length; i++) {          
+    const preview = document.createElement('dl')      
+    preview.className = 'preview'                     
+
+    preview.dataset.id = books[i].id
+    preview.dataset.title = books[i].title
+    preview.dataset.image = books[i].image
+    preview.dataset.subtitle = `${authors[books[i].author]} (${(new Date(books[i].published)).getFullYear()})`
+    preview.dataset.description = books[i].description
+    preview.dataset.genre = books[i].genres
+
+    preview.innerHTML=/*html*/ `
+    <div>
+    <image class='preview__image' src="${books[i].image}" alt="book pic"}/>
+    </div>
+    <div class='preview__info'>
+    <dt class='preview__title'>${books[i].title}<dt>
+    <dt class='preview__author'> By ${authors[books[i].author]}</dt>
+    </div>`
+
     fragment.appendChild(preview)
 }
 // display fragment in data_list_items
-data_list_items.appendChild(fragment)
+const booklist1 = document.querySelector('[data-list-items]') 
+booklist1.appendChild(fragment)
 
-let genres = document.createDocumentFragment()
-let element = document.createElement('option')
-element.value = 'any'
-element = 'All Genres'
-genres.appendChild(element)
+const searchbutton = document.querySelector("[data-header-search]");
+searchbutton.addEventListener('click', () => {
+ document.querySelector("[data-search-overlay]").style.display = "block";
+})
 
-for ([id, name]; Object.entries(genres); i++) {
-    document.createElement('option')
-    element.value = value
-    element.innerText = text
-    genres.appendChild(element)
-}
+const searchCancel = document.querySelector("[data-search-cancel]");
+searchCancel.addEventListener('click', () => {
+ document.querySelector("[data-search-overlay]").style.display = "none";
+})
 
+const settingbutton = document.querySelector("[data-header-settings]")
+settingbutton.addEventListener('click', () => {
+ document.querySelector("[data-settings-overlay]").style.display = "block";
+})
+
+const settingCancel = document.querySelector('[data-settings-cancel]')
+settingCancel.addEventListener('click', () => {
+document.querySelector("[data-settings-overlay]").style.display = "none";
+})
+
+const dataSettingsTheme = document.querySelector('[data-settings-theme]');
+
+const saveButton = document.querySelector("body > dialog:nth-child(5) > div > div > button.overlay__button.overlay__button_primary");
+saveButton.addEventListener('click', handleClick);
 data_search_genres.appendChild(genres)
 
 authors = document.createDocumentFragment()
