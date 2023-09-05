@@ -126,7 +126,7 @@ function handleClick(event) {
         overlay.style.display = "none";
     }
 }
-// clickHandler 
+// clickHandler set theme colors from root in css file
 function setThemeColors(element, darkColor, lightColor) {
     element.style.setProperty('--color-dark', darkColor);
     element.style.setProperty('--color-light', lightColor);
