@@ -175,12 +175,12 @@ const detailsToggle = (event) => {
     const image1 = document.querySelector('[data-list-image]')
     const imageblur = document.querySelector('[data-list-blur]')
     // if statement to display the books id from data.js in the html
-    event.books.id ? overlay1.style.display = "block" : undefined;
-    event.books.description ? description.innerHTML = event.books.description : undefined;
-    event.books.subtitle ? subtitle.innerHTML = event.books.subtitle : undefined;
-    event.books.title ? title.innerHTML = event.books.title : undefined;
-    event.books.image ? image1.setAttribute ('src', event.books.image) : undefined;
-    event.books.image ? imageblur.setAttribute ('src', event.books.image) : undefined;
+    event.dataset.id ? overlay1.style.display = "block" : undefined;
+    event.dataset.description ? description.innerHTML = event.dataset.description : undefined;
+    event.dataset.subtitle ? subtitle.innerHTML = event.dataset.subtitle : undefined;
+    event.dataset.title ? title.innerHTML = event.dataset.title : undefined;
+    event.dataset.image ? image1.setAttribute ('src', event.dataset.image) : undefined;
+    event.dataset.image ? imageblur.setAttribute ('src', event.dataset.image) : undefined;
 };
 // click function to close details
 const detailsClose = document.querySelector('[data-list-close]')    
