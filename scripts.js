@@ -13,6 +13,7 @@ const settings_Cancel = document.querySelector('[data-settings-cancel]')
 settings_Button.addEventListener('click', () => {
     settings_Overlay.showModal()
 })
+
 // ------------------------------------------- Event listener to click cancel -----------------------------------=----------------------- //
 settings_Cancel.addEventListener('click', () => { 
     settings_Overlay.close()
@@ -58,7 +59,7 @@ let page = 1;
 
 // add curly brackets --- replace range with page
 if (!books && !Array.isArray(books)) {throw new Error('Source required')} 
-if (!page && page.length < 2) {throw new Error('Range must be an array with two numbers')}
+if (!page && page.length < 2) {throw new Error('Page must be an array with two numbers')}
 
 const fragment = document.createDocumentFragment()
 // create let variable for startIndex and endIndex 
@@ -168,6 +169,7 @@ const detailsToggle = (event) => {
     event.dataset.image ? image1.setAttribute ('src', event.dataset.image) : undefined;
     event.dataset.image ? imageblur.setAttribute ('src', event.dataset.image) : undefined;
 };
+
 // ------------------------------------------- Click function to close details -------------------------------------------------------------- //
 const details_Close = document.querySelector('[data-list-close]')    
     details_Close.addEventListener('click', () => {
