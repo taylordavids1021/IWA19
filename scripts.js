@@ -41,14 +41,14 @@ for (let i = 0; i < extracted.length; i++) {
     preview.dataset.description = books[i].description
     preview.dataset.genre = books[i].genres
 
-    preview.innerHTML=/*html*/ `
-    <div>
-    <image class='preview__image' src="${books[i].image}" alt="book pic"}/>
-    </div>
-    <div class='preview__info'>
-    <dt class='preview__title'>${books[i].title}<dt>
-    <dt class='preview__author'> By ${authors[books[i].author]}</dt>
-    </div>`
+    preview.innerHTML=// --------------- HTML structure ---------------------------
+    `<div>
+     <image class='preview__image' src="${books[i].image}" alt="book pic"}/>
+     </div>
+     <div class='preview__info'>
+     <dt class='preview__title'>${books[i].title}<dt>
+     <dt class='preview__author'> By ${authors[books[i].author]}</dt>
+     </div>`
 
     fragment.appendChild(preview)
 }
@@ -154,4 +154,90 @@ Object.entries(authors).forEach(([authorId, authorName]) => {
 Object.entries(genres).forEach(([genreId, genreName]) => {
     const optionElement = createOptionElement(genreId, genreName);
     genreSelect.appendChild(optionElement);
+});
+
+// function with paramaters - creating an empty selector for user to direct what the user wants 
+function createOptionElement(value, text) {
+    // creating option in html
+    const optionElement = document.createElement('option');
+    optionElement.value = value;
+    optionElement.textContent = text;
+    return optionElement;
+}
+
+// create event function for details to display
+const detailsToggle = (event) => {  
+    // create variable to call data-"key" in html
+    const overlay1 = document.querySelector('[data-list-active]');
+    const title = document.querySelector('[data-list-title]')
+    const subtitle = document.querySelector('[data-list-subtitle]')
+    const description = document.querySelector('[data-list-description]')
+    const image1 = document.querySelector('[data-list-image]')
+    const imageblur = document.querySelector('[data-list-blur]')
+    // if statement to display the books id from data.js in the html
+    event.books.id ? overlay1.style.display = "block" : undefined;
+    event.books.description ? description.innerHTML = event.books.description : undefined;
+    event.books.subtitle ? subtitle.innerHTML = event.books.subtitle : undefined;
+    event.books.title ? title.innerHTML = event.books.title : undefined;
+    event.books.image ? image1.setAttribute ('src', event.books.image) : undefined;
+    event.books.image ? imageblur.setAttribute ('src', event.books.image) : undefined;
+};
+// click function to close details
+const detailsClose = document.querySelector('[data-list-close]')    
+    detailsClose.addEventListener('click', () => {
+    document.querySelector("[data-list-active]").style.display = "none";
+});
+
+// add event lisnter to click on specific data-list
+const bookclick = document.querySelector('[data-list-items]')
+bookclick.addEventListener('click', detailsToggle)
+
+// show more books - selecting button in html
+const showMoreButton = document.querySelector('[data-list-button]')
+
+// variable structure of books when clicking more
+const numItemsToShow = Math.min(books.length - endIndex,)
+
+// variable structure to display amount of books when clicking more
+const showMoreButtonText = `Show More (${numItemsToShow})`
+
+// .textContent placing variable in HTML 
+showMoreButton.textContent = showMoreButtonText
+
+// event lisener to click the more button and display more books 
+showMoreButton.addEventListener('click', () => {         
+    const fragment = document.createDocumentFragment()
+    startIndex += 36;
+    endIndex += 36;
+    const startIndex1 = startIndex
+    const endIndex1 = endIndex
+    console.log(startIndex1)
+    console.log(endIndex1)
+    const extracted = books.slice(startIndex1, endIndex1)
+
+    // for loop to contuninue displaying all books, images, title, id, description, plublished in object imported from data.js file
+    for (const {author ,image, title, id , description, published} of extracted) {
+        // preview creating an discription list in html and previewing all information stored
+        const preview = document.createElement('dl')
+        preview.className = 'preview'
+        preview.dataset.id = id
+        preview.dataset.title = title
+        preview.dataset.image = image
+        preview.dataset.subtitle = `${authors[author]} (${(new Date(published)).getFullYear()})`
+        preview.dataset.description = description
+        
+        preview.innerHTML= // --------------- HTML structure ---------------------------
+        `<div>
+         <image class='preview__image' src="${image}" alt="book pic"}/>
+         </div>
+         <div class='preview__info'>
+         <dt class='preview__title'>${title}<dt>
+         <dt class='preview__author'> By ${authors[author]}</dt>
+         </div>`
+        // appendChild allowing preview variable to display in fragment
+        fragment.appendChild(preview)
+    }
+    
+    const booklist1 = document.querySelector('[data-list-items]') 
+    booklist1.appendChild(fragment)
 });
