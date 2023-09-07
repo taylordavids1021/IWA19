@@ -297,7 +297,7 @@ data_List_Items.addEventListener('click', (event) => {
     }
  
     if(!active) {return}
-    // -------------------------------------------------- View Book image, title, author, date plublished & style blur
+    // -------------------------------------------------- View Book image, title, author, date plublished & style blur ----------------------- //
     list_Active.open = true;
     list_Image.setAttribute('src', active.image);
     list_Blur.style.backgroundImage = `url('${active.image}')`
