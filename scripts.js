@@ -230,3 +230,90 @@ show_More_Button.addEventListener('click', () => {
     booklist1.appendChild(fragment)
 });
 // -------------------------------------------------- End of show more button ---------------------------------------------------------------- //
+
+// -------------------------------------------------- Handle preview click ------------------------------------------------------------------- //
+const data_List_Items = document.querySelector('[data-list-items]');
+const data_List_Button = document.querySelector('[data-list-button]');
+const list_Active = document.querySelector('[data-list-active]');
+const list_Blur = document.querySelector('[data-list-blur]');
+const list_Image = document.querySelector('[data-list-image]');
+const list_Title = document.querySelector('[data-list-title]');
+const list_Subtitle = document.querySelector('[data-list-subtitle]')
+const list_Description = document.querySelector('[data-list-description]')
+const list_Close_Button = document.querySelector('[data-list-close]');
+
+const matches = books
+
+function createPreview({author, id, image, title}) {
+    let element = document.createElement('button');
+    element.classList = 'preview';
+    element.setAttribute('data-preview', id) 
+    element.innerHTML = // ------------------------------------------ HTML structure ------------------------------------------------- //
+    `<img class='preview__image' src="${image}" />
+    
+     <div class="preview__info">
+     <h3 class="preview__title">${title}</h3>
+     <div class="preview__author">${authors[author]}</div>
+     </div>
+     `;
+
+    return element
+
+}
+
+const fragment1 = document.createDocumentFragment() 
+
+for (const { author, title, image, id } of extracted) {
+    const preview = createPreview({author, id, image, title})
+    
+    fragment1.appendChild(preview) 
+}
+data_List_Items.appendChild(fragment1)
+
+let showMore = page * BOOKS_PER_PAGE
+
+data_List_Button.innerHTML  = // ------------------------------------------ HTML structure ------------------------------------------------- //
+`<span>show More(
+ <span class='list__remaining'>${matches.length - showMore > 0 ? matches.length - showMore : 0}</span>)
+`
+
+data_List_Items.addEventListener('click', (event) => {
+    const path_Array = Array.from(event.path || event.composedPath());
+    
+    let active;
+    for (const node of path_Array){ 
+        
+        if(active)break;
+        const preview_Id = node.dataset?.preview;
+        
+       for (const single_Book of books) { 
+           
+            if(single_Book.id === preview_Id) {
+                active = single_Book;
+                
+                break
+            }
+        }
+    }
+ 
+    if(!active) {return}
+    // -------------------------------------------------- View Book image, title, author, date plublished & style blur
+    list_Active.open = true;
+    list_Image.setAttribute('src', active.image);
+    list_Blur.style.backgroundImage = `url('${active.image}')`
+    list_Title.textContent = active.title;
+    list_Subtitle.textContent = `${authors[active.author]} (${new Date(active.published).getFullYear()})`
+    list_Description.textContent = active.description
+    
+});
+
+// -------------------------------------------------- closing the book ----------------------------------------------------------------------- //
+list_Close_Button.addEventListener('click', () => {
+    list_Active.open = false
+})
+
+// -------------------------------------------------- Search modal show ---------------------------------------------------------------------- //
+search_Header_Button.addEventListener('click', () => {
+    search_Overlay.open = true;
+    // -------------------------------------------------- Data-search-title.focus() -------------------------------------------------- //
+}) 
