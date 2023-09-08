@@ -1,6 +1,5 @@
 # IWA19
 IWA19_01: Final Capstone Submission
-# Final Capstone Project IWA19
  
 # As a junior JavaScript developer, you have been approached by a small startup called Book Connect. They run a social media platform specifically targeted at book enthusiasts. A basic version of the product was created by another freelance developer.
 
@@ -8,14 +7,27 @@ IWA19_01: Final Capstone Submission
 
 # While you understand that the task will be challenging and frustrating at times, you know that this is a fantastic opportunity for you to gain experience as a junior developer. You will be able to showcase your skills and demonstrate your ability to troubleshoot and improve existing code. They have asked you to spend a week digging into the codebase and compile your recommendations into a slideshow to be presented to the team at the end of the week.
 
-# They have provided you with a link to the following GitHub repository.
-
 User Stories
-# As a user, I want to view a list of book previews, by title and author, so that I can discover new books to read.
-# As a user, I want an image associated with all book previews so that I can recognize a book by the cover even if I forgot the name.
-# As a user, I want to have the option of reading a summary of the book so that I can decide whether I want to read it.
-# As a user, I want to have the option of seeing the date that a book was published so that I can determine how easy it is to obtain second-hand.
-# As a user, I want to find books based on specific text phrases so that I don’t need to remember the entire title of a book.
-# As a user, I want to filter books by author so that I can find books to read by authors that I enjoy.
-# As a user, I want to filter books by genre so that I can find books to read in genres that I enjoy.
-# As a user, I want to toggle between dark and light modes so that I can use the app comfortably at night.
+- As a user, I want to view a list of book previews, by title and author, so that I can discover new books to read.
+
+- As a user, I want an image associated with all book previews so that I can recognize a book by the cover even if I forgot the name.
+
+- As a user, I want to have the option of reading a summary of the book so that I can decide whether I want to read it.
+
+- As a user, I want to have the option of seeing the date that a book was published so that I can determine how easy it is to obtain second-hand.
+
+- As a user, I want to find books based on specific text phrases so that I don’t need to remember the entire title of a book.
+
+- As a user, I want to filter books by author so that I can find books to read by authors that I enjoy.
+
+- As a user, I want to filter books by genre so that I can find books to read in genres that I enjoy.
+
+- As a user, I want to toggle between dark and light modes so that I can use the app comfortably at night.
+
+# Completed 
+- 08 September 2023
+
+# Email 
+- Taylordavids997@gmail.com
+
+# PowerPoint link
