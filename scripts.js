@@ -12,7 +12,6 @@ const search_Overlay = document.querySelector('[data-search-overlay]');
 const book_List_1 = document.querySelector('[data-list-items]');
 const message_List = document.querySelector('[data-list-message]')
 const data_List_Button = document.querySelector('[data-list-button]');
-const active_List = document.querySelector('[data-list-active]');
 
 // ------------------------------------------- Day & Night Option ----------------------------------------------------------------------- //
 // ------------------------------------------- Event listner allowing you to click option to show theme --------------------------------- //
