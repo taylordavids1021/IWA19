@@ -61,22 +61,24 @@ if (selected.theme === 'night') {
 // ------------------------------------------- Create let for pages -- as it changes further in the code -------------------------------- //
 let page = 1;
 
-// add curly brackets --- replace range with page
+// ------------------------------------------- Add curly brackets --- replace range with page ------------------------------------------- //
 if (!books && !Array.isArray(books)) {throw new Error('Source required')} 
 if (!page && page.length < 2) {throw new Error('Page must be an array with two numbers')}
 
 const fragment = document.createDocumentFragment()
-// create let variable for startIndex and endIndex 
+// ------------------------------------------- Create let variable for start_Index and end_Index ------------------------------------------- //
 let start_Index = 0;                                  
 let end_Index = 36;                                
-// conclude let variable to extracted   
+// ------------------------------------------- conclude let variable to extracted ------------------------------------------- //
 const extracted = books.slice(start_Index, end_Index)
 
-// for loop to view books - imported data from data.js
+// ------------------------------------------- for loop to view books - imported data from data.js --------------------------------------- //
 for (let i = 0; i < extracted.length; i++) {          
     const preview = document.createElement('dl')      
     preview.className = 'preview'                     
-
+    /** The dataset property itself can be read, but not directly written. Instead, all writes must be to the 
+      * individual properties within the dataset, which in turn represent the data attributes.
+      */
     preview.dataset.id = books[i].id
     preview.dataset.title = books[i].title
     preview.dataset.image = books[i].image
@@ -154,8 +156,10 @@ const detailsToggle = (event) => {
     const description = document.querySelector('[data-list-description]')
     const image_Src = document.querySelector('[data-list-image]')
     const blur_List = document.querySelector('[data-list-blur]')
-    // ------------------------------------------- if statement to display the books id from data.js in the html ------------------------ //
-    // ------------------------------------------ If true them return the following below to display when clicked ----------------------- //
+    /**
+     * The target property returns the element on which the event occurred, 
+     * opposed to the currentTarget property, which returns the element whose event listener triggered the event.
+     */
     event.target.dataset.id ? overlay_1.style.display = "block" : undefined;
     event.target.dataset.description ? description.innerHTML = event.target.dataset.description : undefined;
     event.target.dataset.subtitle ? subtitle.innerHTML = event.target.dataset.subtitle : undefined;
@@ -186,7 +190,7 @@ const show_More_Button_Text = `Show More (${num_Items_To_Show})`
 // ------------------------------------------- .textContent placing variable in HTML -------------------------------------------------------- //
 show_More_Button.textContent = show_More_Button_Text
 
-// ------------------------------------------- Event lisener to click the more button and display more books -------------------------------- //
+// ------------------------------------------- Event listener to click the more button and display more books -------------------------------- //
 show_More_Button.addEventListener('click', () => {         
     const fragment = document.createDocumentFragment()
     start_Index += 36;
@@ -197,9 +201,9 @@ show_More_Button.addEventListener('click', () => {
     console.log(end_Index_1)
     const extracted = books.slice(start_Index_1, end_Index_1)
 
-    // for loop to contuninue displaying all books, images, title, id, description, plublished in object imported from data.js file ---- //
+    // ------- for loop to continue displaying all books, images, title, id, description, published in object imported from data.js file ---- //
     for (const {author ,image, title, id , description, published} of extracted) {
-        // preview creating an discription list in html and previewing all information stored
+        // ---- Preview creating an description list in html and previewing all information stored ------------------------------------------- //
         const preview = document.createElement('dl')
         preview.className = 'preview'
         preview.dataset.id = id
