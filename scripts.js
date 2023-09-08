@@ -155,14 +155,14 @@ function createOptionElement(value, text) {
 // ------------------------------------------- Create event function for details to display ------------------------------------------------- //
 const detailsToggle = (event) => {  
     // ------------------------------------------- Create variable to call data-"key" in html ------------------------------------------- //
-    const overlay1 = document.querySelector('[data-list-active]');
+    const overlay_1 = document.querySelector('[data-list-active]');
     const title = document.querySelector('[data-list-title]')
     const subtitle = document.querySelector('[data-list-subtitle]')
     const description = document.querySelector('[data-list-description]')
     const image1 = document.querySelector('[data-list-image]')
     const imageblur = document.querySelector('[data-list-blur]')
     // ------------------------------------------- if statement to display the books id from data.js in the html ------------------------ //
-    event.dataset.id ? overlay1.style.display = "block" : undefined;
+    event.dataset.id ? overlay_1.style.display = "block" : undefined;
     event.dataset.description ? description.innerHTML = event.dataset.description : undefined;
     event.dataset.subtitle ? subtitle.innerHTML = event.dataset.subtitle : undefined;
     event.dataset.title ? title.innerHTML = event.dataset.title : undefined;
@@ -231,8 +231,11 @@ show_More_Button.addEventListener('click', () => {
 });
 // -------------------------------------------------- End of show more button ---------------------------------------------------------------- //
 
-// -------------------------------------------------- Handle preview click ------------------------------------------------------------------- //
+// -------------------------------------------------- Creating an onclick option for user to view books -------------------------------------- //
+
+// -------------------------------------------------- Retrieved elements from the DOM using query Selectors ---------------------------------- //
 const data_List_Items = document.querySelector('[data-list-items]');
+// const list_Message = document.querySelector('[data-list-message]')
 const data_List_Button = document.querySelector('[data-list-button]');
 const list_Active = document.querySelector('[data-list-active]');
 const list_Blur = document.querySelector('[data-list-blur]');
@@ -242,8 +245,7 @@ const list_Subtitle = document.querySelector('[data-list-subtitle]')
 const list_Description = document.querySelector('[data-list-description]')
 const list_Close_Button = document.querySelector('[data-list-close]');
 
-const matches = books
-
+// ------------------------------------------ Creating function to preview each individual book continusly ---------------------------------- //
 function createPreview({author, id, image, title}) {
     let element = document.createElement('button');
     element.classList = 'preview';
@@ -255,14 +257,14 @@ function createPreview({author, id, image, title}) {
      <h3 class="preview__title">${title}</h3>
      <div class="preview__author">${authors[author]}</div>
      </div>
-     `;
+    `;
 
     return element
 
 }
-
 const fragment1 = document.createDocumentFragment() 
 
+// ------------------------------------------ Creating for loop to preview each individual book continusly ------------------------------ //
 for (const { author, title, image, id } of extracted) {
     const preview = createPreview({author, id, image, title})
     
@@ -270,24 +272,41 @@ for (const { author, title, image, id } of extracted) {
 }
 data_List_Items.appendChild(fragment1)
 
-let showMore = page * BOOKS_PER_PAGE
+// ------------------------------------------ Show more books button -------------------------------------------------------------------- //
+// ------------------------------------------ Variable to calculate page and books per page --------------------------------------------- //
+const matches = books
+let show_More = page * BOOKS_PER_PAGE
+// ------------------------------------------ Click function ---------------------------------------------------------------------------- //
+data_List_Button.addEventListener('click', () =>{
+    const remaining = matches.slice(show_More, matches.length) 
+    
+    const fragment = document.createDocumentFragment()
+    for(const {author, title, image, id} of remaining){
+        const  preview = createPreview({author, id, image, title});
+        fragment.appendChild(preview)
+    }
+    data_List_Items.appendChild(fragment) 
+    show_More += remaining.length;
+    data_List_Button.disabled = !(matches.length - show_More > 0)
+});
 
 data_List_Button.innerHTML  = // ------------------------------------------ HTML structure ------------------------------------------------- //
 `<span>show More(
- <span class='list__remaining'>${matches.length - showMore > 0 ? matches.length - showMore : 0}</span>)
+ <span class='list__remaining'>${matches.length - show_More > 0 ? matches.length - show_More : 0}</span>)
 `
 
 data_List_Items.addEventListener('click', (event) => {
+    // ------------------------------------------ Creating a path way form the html to the body to div etc -------------------------------- //
     const path_Array = Array.from(event.path || event.composedPath());
-    
+    // ------------------------------------------ For loop to select each book individually should not select more than one book ---------- //
     let active;
     for (const node of path_Array){ 
-        
+        // ------------------------------------------ Break stop code from running at a specific point ------------------------------------ //
         if(active)break;
         const preview_Id = node.dataset?.preview;
-        
+        // Single book is an variable that is create calling data from books an object in data.js ----------------------------------------- //
        for (const single_Book of books) { 
-           
+            // if statement if book.id is compared to preview_Id(variable created above)then it should active then break ------------------ //
             if(single_Book.id === preview_Id) {
                 active = single_Book;
                 
@@ -295,7 +314,7 @@ data_List_Items.addEventListener('click', (event) => {
             }
         }
     }
- 
+    // ------------------------------------------ If active them return the following below ----------------------------------------------- //
     if(!active) {return}
     // -------------------------------------------------- View Book image, title, author, date plublished & style blur ----------------------- //
     list_Active.open = true;
@@ -307,13 +326,7 @@ data_List_Items.addEventListener('click', (event) => {
     
 });
 
-// -------------------------------------------------- closing the book ----------------------------------------------------------------------- //
+// -------------------------------------------------- closing the book preview ----------------------------------------------------------------------- //
 list_Close_Button.addEventListener('click', () => {
     list_Active.open = false
 })
-
-// -------------------------------------------------- Search modal show ---------------------------------------------------------------------- //
-search_Header_Button.addEventListener('click', () => {
-    search_Overlay.open = true;
-    // -------------------------------------------------- Data-search-title.focus() -------------------------------------------------- //
-}) 
